@@ -1,14 +1,25 @@
 import pandas as pd
 from sklearn import preprocessing
 import numpy as np
+import matplotlib.pyplot as plt
 
 history_points = 50
 
 
 def csv_to_dataset(csv_path):
     data = pd.read_csv(csv_path)
-    data = data.drop('date', axis=1)
-    data = data.drop(0, axis=0)
+    data = data.sort_values(by = 'date')
+    data.reset_index(inplace=True)
+
+    data[['1. open']].plot()
+    plt.show()
+    
+    print(data)
+    
+    del data['date']
+    del data['index']
+
+    print(data)
 
     data = data.values
 
